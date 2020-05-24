@@ -13,6 +13,9 @@ export default class SeatSelection extends React.Component {
     super(props);
     this.state = {
       seatsArray: Seats,
+      finalAmount: 0,
+      isDifferent: false,
+
       goldSeats: [],
       diamondSeats: [],
       seatsSelected: []
@@ -54,14 +57,18 @@ export default class SeatSelection extends React.Component {
 
   seatSelected(dataRecieved, e) {
     let finalSeats = [];
+    let isDifferent;
+
     finalSeats = this.state.seatsSelected && this.state.seatsSelected.length ? this.state.seatsSelected : [];
     if (finalSeats && finalSeats.length) {
       const seat = this.state.seatsSelected[0];
       if (seat.tname.toString() === dataRecieved.tname.toString()) {
         finalSeats.push(dataRecieved);
+        isDifferent = false;
 
       } else {
         finalSeats = [];
+        isDifferent = true
       }
 
     } else {
@@ -69,7 +76,21 @@ export default class SeatSelection extends React.Component {
     }
 
     this.setState({
-      seatsSelected: finalSeats
+      seatsSelected: finalSeats,
+      isDifferent: isDifferent
+
+    }, () => {
+      let sum = 0;
+
+      if (finalSeats && finalSeats.length) {
+        finalSeats.forEach((seat) => {
+          sum = parseInt(seat.price) + sum;
+        });
+      }
+
+      this.setState({
+        finalAmount: sum
+      });
     });
   }
 
@@ -130,13 +151,59 @@ export default class SeatSelection extends React.Component {
                         : " bg-grey" 
                       )
                     }
-                    onClick={this.seatSelected.bind(this, data)}
+                    onClick={
+                      parseInt(data.free) == parseInt(data.seatNumber) ?
+                        this.seatSelected.bind(this, data)
+                      : null
+                    }
                   >
                     <p className="text-center">{data.seatNumber}</p>
                   </Col>
                 })
               : null
-              }
+            }
+          </Row>
+
+          <Row className="mt-2rem">
+            {
+              this.state.seatsSelected && this.state.seatsSelected.length ?
+                <h4>Total Payable Amount</h4>
+              : ''
+            }
+          </Row>
+
+          <Row>
+            {
+              this.state.seatsSelected && this.state.seatsSelected.length ?
+                <ul>
+                  {
+                    this.state.seatsSelected.map((data, index) => {
+                      return <li key={index+'____Random'}>
+                        {data.seatNumber} - {data.price} &#8377;
+                      </li>
+                    })
+                  }
+                </ul>
+              : null
+            }
+          </Row>
+
+          <Row>
+            {
+              this.state.finalAmount ?
+                <b>Total Amount is : {this.state.finalAmount} Rupees Only /-</b>
+              : null
+            }
+          </Row>
+
+          <Row>
+            {
+              this.state.isDifferent ?
+                <div>
+                  <b>Opps</b> &#128559; You are not allowed select seats from two diffrent sections at same time.
+                </div>
+              : null
+            }
           </Row>
         </Container>
       </div>
