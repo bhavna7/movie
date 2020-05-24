@@ -1,0 +1,38 @@
+[
+  {
+    "tname": "gold",
+    "free" : 1,
+    "blocked": 2,
+    "price": 200
+  },
+  {
+    "tname": "gold",
+    "free" : 3,
+    "blocked": 5,
+    "price": 200
+  },
+  {
+    "tname": "gold",
+    "free" : 4,
+    "blocked": 6,
+    "price": 200
+  },
+  {
+    "tname": "diamond",
+    "free" : 1,
+    "blocked": 3,
+    "price": 500
+  },
+  {
+    "tname": "diamond",
+    "free" : 2,
+    "blocked": 4,
+    "price": 500
+  },
+  {
+    "tname": "diamond",
+    "free" : 6,
+    "blocked": 5,
+    "price": 500
+  }
+]
