@@ -24,7 +24,7 @@ export default class SeatSelection extends React.Component {
 
   componentDidMount() {
     if (this.state.seatsArray && this.state.seatsArray.length) {
-      this.getSeats()
+      this.getSeats();
     }
   }
 
@@ -49,15 +49,35 @@ export default class SeatSelection extends React.Component {
       return a.seatNumber - b.seatNumber;
     });
 
+    goldSeats = this.markSeats(goldSeats);
+    diamondSeats = this.markSeats(diamondSeats);
+
     this.setState({
       goldSeats: goldSeats,
       diamondSeats: diamondSeats
+
     });
+  }
+
+  markSeats(seatsRecieved) {
+    if (seatsRecieved && seatsRecieved.length) {
+      seatsRecieved.forEach((rSeat) => {
+        if (parseInt(rSeat.free) === parseInt(rSeat.seatNumber)) {
+          rSeat.isBlocked = false;
+
+        } else {
+          rSeat.isBlocked = true;
+        }
+      });
+    }
+    return seatsRecieved;
   }
 
   seatSelected(dataRecieved, e) {
     let finalSeats = [];
     let isDifferent;
+
+    this.state.isDifferent ? dataRecieved.isBlocked = false : dataRecieved.isBlocked = true;
 
     finalSeats = this.state.seatsSelected && this.state.seatsSelected.length ? this.state.seatsSelected : [];
     if (finalSeats && finalSeats.length) {
@@ -69,6 +89,9 @@ export default class SeatSelection extends React.Component {
       } else {
         finalSeats = [];
         isDifferent = true
+
+        this.markSeats(this.state.goldSeats);
+        this.markSeats(this.state.diamondSeats);
       }
 
     } else {
@@ -114,13 +137,13 @@ export default class SeatSelection extends React.Component {
                     className={
                       "mt-2rem box" + 
                       (
-                        parseInt(data.free) == parseInt(data.seatNumber) ? 
+                        data.isBlocked == false ? 
                           " cursor-pointer bg-white"
                         : " bg-grey" 
                       )
                     }
                     onClick={
-                      parseInt(data.free) == parseInt(data.seatNumber) ?
+                      parseInt(data.free) == parseInt(data.seatNumber) && data.isBlocked == false?
                         this.seatSelected.bind(this, data)
                       : null
                     }
@@ -146,13 +169,13 @@ export default class SeatSelection extends React.Component {
                     className={
                       "mt-2rem box" + 
                       (
-                        parseInt(data.free) == parseInt(data.seatNumber) ? 
+                        data.isBlocked == false ? 
                           " cursor-pointer bg-white"
                         : " bg-grey" 
                       )
                     }
                     onClick={
-                      parseInt(data.free) == parseInt(data.seatNumber) ?
+                      parseInt(data.free) == parseInt(data.seatNumber) && data.isBlocked == false?
                         this.seatSelected.bind(this, data)
                       : null
                     }
