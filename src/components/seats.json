@@ -3,36 +3,83 @@
     "tname": "gold",
     "free" : 1,
     "blocked": 2,
-    "price": 200
+    "price": 200,
+    "seatNumber": 1
   },
   {
     "tname": "gold",
     "free" : 3,
     "blocked": 5,
-    "price": 200
+    "price": 200,
+    "seatNumber": 3
   },
   {
     "tname": "gold",
     "free" : 4,
     "blocked": 6,
-    "price": 200
+    "price": 200,
+    "seatNumber": 4
+  },
+  {
+    "tname": "gold",
+    "free" : 1,
+    "blocked": 2,
+    "price": 200,
+    "seatNumber": 2
+  },
+  {
+    "tname": "gold",
+    "free" : 3,
+    "blocked": 5,
+    "seatNumber": 5
+  },
+  {
+    "tname": "gold",
+    "free" : 4,
+    "blocked": 6,
+    "price": 200,
+    "seatNumber": 6
   },
   {
     "tname": "diamond",
     "free" : 1,
     "blocked": 3,
-    "price": 500
+    "price": 500,
+    "seatNumber": 1
   },
   {
     "tname": "diamond",
     "free" : 2,
     "blocked": 4,
-    "price": 500
+    "price": 500,
+    "seatNumber": 2
   },
   {
     "tname": "diamond",
     "free" : 6,
     "blocked": 5,
-    "price": 500
+    "price": 500,
+    "seatNumber": 6
+  },
+  {
+    "tname": "diamond",
+    "free" : 1,
+    "blocked": 3,
+    "price": 500,
+    "seatNumber": 3
+  },
+  {
+    "tname": "diamond",
+    "free" : 2,
+    "blocked": 4,
+    "price": 500,
+    "seatNumber": 4
+  },
+  {
+    "tname": "diamond",
+    "free" : 6,
+    "blocked": 5,
+    "price": 500,
+    "seatNumber": 5
   }
 ]

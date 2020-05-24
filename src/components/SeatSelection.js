@@ -13,12 +13,47 @@ export default class SeatSelection extends React.Component {
     super(props);
     this.state = {
       seatsArray: Seats,
-      dummyArray: [1,2,3,4,5,6,7,8,9,20]
+      goldSeats: [],
+      diamondSeats: []
     }
   }
 
   componentDidMount() {
-    console.log('in comp = ', this.state);
+    if (this.state.seatsArray && this.state.seatsArray.length) {
+      this.getSeats()
+    }
+  }
+
+  getSeats() {
+    let goldSeats = [];
+    let diamondSeats = [];
+
+    this.state.seatsArray.forEach((seat) => {
+      if (seat.tname.toString() === 'gold') {
+        goldSeats.push(seat);
+
+      } else {
+        diamondSeats.push(seat);
+      }
+    });
+
+    goldSeats.sort((a, b) => {
+      return a.seatNumber - b.seatNumber;
+    });
+
+    diamondSeats.sort((a, b) => {
+      return a.seatNumber - b.seatNumber;
+    });
+
+    this.setState({
+      goldSeats: goldSeats,
+      diamondSeats: diamondSeats
+    });
+  }
+
+  seatSelected(dataRecieved, e) {
+    console.log('e = ', e);
+    console.log(dataRecieved);
   }
 
   render() {
@@ -33,10 +68,22 @@ export default class SeatSelection extends React.Component {
 
           <Row>
             {
-              this.state.seatsArray && this.state.seatsArray.length ?
-                this.state.seatsArray.map((data, index) => {
-                  return <Col sm="2" key={index+'____Bhavna'}>
-                    {data.tname}
+              this.state.goldSeats && this.state.goldSeats.length ?
+                this.state.goldSeats.map((data, index) => {
+                  return <Col 
+                    sm="2" 
+                    key={index+'____Bhavna'} 
+                    className={
+                      "mt-2rem box" + 
+                      (
+                        parseInt(data.free) == parseInt(data.seatNumber) ? 
+                          " cursor-pointer bg-white"
+                        : " bg-grey" 
+                      )
+                    }
+                    onClick={this.seatSelected.bind(this, data)}
+                  >
+                    <p className="text-center">{data.seatNumber}</p>
                   </Col>
                 })
               : null
@@ -49,10 +96,22 @@ export default class SeatSelection extends React.Component {
 
           <Row>
             {
-              this.state.seatsArray && this.state.seatsArray.length ?
-                this.state.seatsArray.map((data, index) => {
-                  return <Col sm="2" key={index+'____Bhavna'}>
-                    {data.tname}
+              this.state.diamondSeats && this.state.diamondSeats.length ?
+                this.state.diamondSeats.map((data, index) => {
+                  return <Col 
+                    sm="2" 
+                    key={index+'____Bhavna'} 
+                    className={
+                      "mt-2rem box" + 
+                      (
+                        parseInt(data.free) == parseInt(data.seatNumber) ? 
+                          " cursor-pointer bg-white"
+                        : " bg-grey" 
+                      )
+                    }
+                    onClick={this.seatSelected.bind(this, data)}
+                  >
+                    <p className="text-center">{data.seatNumber}</p>
                   </Col>
                 })
               : null
