@@ -14,7 +14,8 @@ export default class SeatSelection extends React.Component {
     this.state = {
       seatsArray: Seats,
       goldSeats: [],
-      diamondSeats: []
+      diamondSeats: [],
+      seatsSelected: []
     }
   }
 
@@ -52,8 +53,24 @@ export default class SeatSelection extends React.Component {
   }
 
   seatSelected(dataRecieved, e) {
-    console.log('e = ', e);
-    console.log(dataRecieved);
+    let finalSeats = [];
+    finalSeats = this.state.seatsSelected && this.state.seatsSelected.length ? this.state.seatsSelected : [];
+    if (finalSeats && finalSeats.length) {
+      const seat = this.state.seatsSelected[0];
+      if (seat.tname.toString() === dataRecieved.tname.toString()) {
+        finalSeats.push(dataRecieved);
+
+      } else {
+        finalSeats = [];
+      }
+
+    } else {
+      finalSeats.push(dataRecieved);
+    }
+
+    this.setState({
+      seatsSelected: finalSeats
+    });
   }
 
   render() {
@@ -81,7 +98,11 @@ export default class SeatSelection extends React.Component {
                         : " bg-grey" 
                       )
                     }
-                    onClick={this.seatSelected.bind(this, data)}
+                    onClick={
+                      parseInt(data.free) == parseInt(data.seatNumber) ?
+                        this.seatSelected.bind(this, data)
+                      : null
+                    }
                   >
                     <p className="text-center">{data.seatNumber}</p>
                   </Col>
