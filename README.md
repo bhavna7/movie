@@ -1,9 +1,26 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Movie
 
-### `npm start`
+This a ReactJs app, integrated with bootstrap. This is a basic app where the user is given a basic UI for selecting the seats for the movie.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```
+1. The seats that are already booked are shown in grey color and clicks are disabled.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+2. The seats that are available for booking are in white color and are clickable.
+
+3. The total amount is visible at the end.
+```
+
+## Installation
+
+After cloning the repository do
+
+```bash
+npm install
+```
+
+## Run
+Go inside the project directory and open terminal and type
+
+```
+npm start
+```
