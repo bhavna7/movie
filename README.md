@@ -9,7 +9,9 @@ This a ReactJs app, integrated with bootstrap. This is a basic app where the use
 
 3. The total amount is visible at the end.
 ```
-
+## See it Live
+The App is deployed on Heroku,
+find it here https://movie-ticket-selector.herokuapp.com/
 ## Installation
 
 After cloning the repository do
