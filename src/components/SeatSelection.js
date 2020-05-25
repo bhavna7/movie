@@ -5,7 +5,6 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
 import '../App.css'
-
 import Seats from './seats.json';
 
 export default class SeatSelection extends React.Component { 
@@ -73,14 +72,18 @@ export default class SeatSelection extends React.Component {
     return seatsRecieved;
   }
 
-  seatSelected(dataRecieved, e) {
+  seatSelected(dataRecieved, index, e) {
     let finalSeats = [];
     let isDifferent;
+
+    console.log(index);
+    console.log(dataRecieved);
 
     finalSeats = this.state.seatsSelected && this.state.seatsSelected.length ? this.state.seatsSelected : [];
     if (finalSeats && finalSeats.length) {
       const seat = this.state.seatsSelected[0];
       if (seat.tname.toString() === dataRecieved.tname.toString()) {
+        dataRecieved.modifiedName = dataRecieved.seatNumber + String.fromCharCode(65+index);
         finalSeats.push(dataRecieved);
         isDifferent = false;
 
@@ -92,6 +95,7 @@ export default class SeatSelection extends React.Component {
       }
 
     } else {
+      dataRecieved.modifiedName = dataRecieved.seatNumber + String.fromCharCode(65+index);
       finalSeats.push(dataRecieved);
     }
 
@@ -143,11 +147,11 @@ export default class SeatSelection extends React.Component {
                     }
                     onClick={
                       parseInt(data.free) == parseInt(data.seatNumber) && data.isBlocked == false?
-                        this.seatSelected.bind(this, data)
+                        this.seatSelected.bind(this, data, index)
                       : null
                     }
                   >
-                    <p className="text-center">{data.seatNumber}</p>
+                    <p className="text-center">{data.seatNumber}{String.fromCharCode(65+index)}</p>
                   </Col>
                 })
               : null
@@ -175,11 +179,11 @@ export default class SeatSelection extends React.Component {
                     }
                     onClick={
                       parseInt(data.free) == parseInt(data.seatNumber) && data.isBlocked == false?
-                        this.seatSelected.bind(this, data)
+                        this.seatSelected.bind(this, data, index)
                       : null
                     }
                   >
-                    <p className="text-center">{data.seatNumber}</p>
+                    <p className="text-center">{data.seatNumber}{String.fromCharCode(65+index)}</p>
                   </Col>
                 })
               : null
@@ -197,15 +201,18 @@ export default class SeatSelection extends React.Component {
           <Row>
             {
               this.state.seatsSelected && this.state.seatsSelected.length ?
-                <ul>
-                  {
-                    this.state.seatsSelected.map((data, index) => {
-                      return <li key={index+'____Random'}>
-                        Seat: {data.seatNumber} - {data.price} &#8377;
-                      </li>
-                    })
-                  }
-                </ul>
+                <div>
+                  <p> You have selected all seats in {this.state.seatsSelected[0].tname.toUpperCase()} row.</p>
+                  <ul>
+                    {
+                      this.state.seatsSelected.map((data, index) => {
+                        return <li key={index+'____Random'}>
+                          Seat: {data.modifiedName} - {data.price} &#8377;
+                        </li>
+                      })
+                    }
+                  </ul>
+                </div>
               : null
             }
           </Row>
