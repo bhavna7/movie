@@ -77,8 +77,6 @@ export default class SeatSelection extends React.Component {
     let finalSeats = [];
     let isDifferent;
 
-    this.state.isDifferent ? dataRecieved.isBlocked = false : dataRecieved.isBlocked = true;
-
     finalSeats = this.state.seatsSelected && this.state.seatsSelected.length ? this.state.seatsSelected : [];
     if (finalSeats && finalSeats.length) {
       const seat = this.state.seatsSelected[0];
@@ -102,6 +100,8 @@ export default class SeatSelection extends React.Component {
       isDifferent: isDifferent
 
     }, () => {
+      this.state.isDifferent === true ? dataRecieved.isBlocked = false : dataRecieved.isBlocked = true;
+
       let sum = 0;
 
       if (finalSeats && finalSeats.length) {
