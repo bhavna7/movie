@@ -1,4 +1,4 @@
-# Movie
+# Movie ![Made With Love](https://img.shields.io/badge/Made%20With-Love-orange.svg)
 
 This a ReactJs app, integrated with bootstrap. This is a basic app where the user is given a basic UI for selecting the seats for the movie.
 
@@ -22,5 +22,5 @@ npm install
 Go inside the project directory and open terminal and type
 
 ```
-npm start
+npm run start-react
 ```
