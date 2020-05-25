@@ -90,8 +90,7 @@ export default class SeatSelection extends React.Component {
         finalSeats = [];
         isDifferent = true
 
-        this.markSeats(this.state.goldSeats);
-        this.markSeats(this.state.diamondSeats);
+        this.markSeats(this.state.seatsArray);
       }
 
     } else {
@@ -202,7 +201,7 @@ export default class SeatSelection extends React.Component {
                   {
                     this.state.seatsSelected.map((data, index) => {
                       return <li key={index+'____Random'}>
-                        {data.seatNumber} - {data.price} &#8377;
+                        Seat: {data.seatNumber} - {data.price} &#8377;
                       </li>
                     })
                   }
